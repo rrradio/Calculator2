@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws RuntimeException {
 
         Scanner s = new Scanner(System.in);
         System.out.println("Введите выражение:");
@@ -16,8 +16,7 @@ public class Main {
         }
 
         if (index == -1) {
-            System.out.println("Некорректное выражение");         // отсекаем случаи когда нет оператора
-            return;
+            throw new RuntimeException();
         }
         String[] ekranActions = {"\\+", "-", "/", "\\*"};         //Задаем массив с экранированными арифм. действиями
         String[] chisla = primer.split(ekranActions[index]);      //Получаем массив типа стринг из двух введённых чисел,
@@ -46,12 +45,12 @@ public class Main {
             }
 
         } else if (isRoman(chisla[0]) && isArabian(chisla[1])) {                  //если первое римское, а второе арабское
-            System.out.println("Числа должны быть в одной системе счисления");
+            throw new RuntimeException();
 
         } else if (isArabian(chisla[0]) && isRoman(chisla[1])) {                  //если первое арабское, а второе римское
-            System.out.println("Числа должны быть в одной системе счисления");
+            throw new RuntimeException();
         } else {
-            System.out.println("Некорректное выражение");
+            throw new RuntimeException();
         }
 
 
@@ -63,7 +62,11 @@ public class Main {
         for(int i = 0; i<= romanAll.length; i++) {
             if (k == Arrays.asList(romanAll).indexOf(romanAll[i])) {
                 String str = romanAll[i];                                                          //метод возвращает римское число
+                if (str == romanAll[0]) {
+                    throw new RuntimeException();
+                }
                 return str;                                                                        //если его применить к арабскому числу от 1 до 100
+
             }
         }
         String str = "";
