@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws RuntimeException {
+    public static void main(String[] args) throws Exception {
 
         Scanner s = new Scanner(System.in);
         System.out.println("Введите выражение:");
@@ -16,7 +16,7 @@ public class Main {
         }
 
         if (index == -1) {
-            throw new RuntimeException();
+            throw new Exception("Должен быть оператор");
         }
         String[] ekranActions = {"\\+", "-", "/", "\\*"};         //Задаем массив с экранированными арифм. действиями
         String[] chisla = primer.split(ekranActions[index]);      //Получаем массив типа стринг из двух введённых чисел,
@@ -45,25 +45,25 @@ public class Main {
             }
 
         } else if (isRoman(chisla[0]) && isArabian(chisla[1])) {                  //если первое римское, а второе арабское
-            throw new RuntimeException();
+            throw new Exception("Числа должны быть в одной системе");
 
         } else if (isArabian(chisla[0]) && isRoman(chisla[1])) {                  //если первое арабское, а второе римское
-            throw new RuntimeException();
+            throw new Exception("Числа должны быть в одной системе");
         } else {
-            throw new RuntimeException();
+            throw new Exception("Должно быть два операнда меньше 10 и один оператор");
         }
 
 
     }
 
-    public static String convToRim(int k) {
-        String[] romanAll = {"в римской системе нет нуля", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX", "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX", "XL", "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "L", "LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX", "LXI", "LXII", "LXIII", "LXIV", "LXV", "LXVI", "LXVII", "LXVIII", "LXIX", "LXX", "LXXI", "LXXII", "LXXIII", "LXXIV", "LXXV", "LXXVI", "LXXVII", "LXXVIII", "LXXIX", "LXXX", "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC", "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX", "C"};
+    public static String convToRim(int k) throws Exception {
+        String[] romanAll = {"0", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX", "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX", "XL", "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "L", "LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX", "LXI", "LXII", "LXIII", "LXIV", "LXV", "LXVI", "LXVII", "LXVIII", "LXIX", "LXX", "LXXI", "LXXII", "LXXIII", "LXXIV", "LXXV", "LXXVI", "LXXVII", "LXXVIII", "LXXIX", "LXXX", "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC", "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX", "C"};
 
         for(int i = 0; i<= romanAll.length; i++) {
             if (k == Arrays.asList(romanAll).indexOf(romanAll[i])) {
                 String str = romanAll[i];                                                          //метод возвращает римское число
                 if (str == romanAll[0]) {
-                    throw new RuntimeException();
+                    throw new Exception("В римской системе нет нуля");
                 }
                 return str;                                                                        //если его применить к арабскому числу от 1 до 100
 
@@ -113,7 +113,7 @@ public class Main {
 
 
 
-    public static String calc(String primer) throws RuntimeException{                //метод берет на вход строку, выдает результат арифм. действия.
+    public static String calc(String primer) throws Exception{                //метод берет на вход строку, выдает результат арифм. действия.
         String[] actions = {"+", "-", "/", "*"};                                    //Задаем массив типа стринг из 4 арифм. действий
         String str = new String();
         int index = -1;
@@ -126,7 +126,7 @@ public class Main {
         String[] ekranActions = {"\\+", "-", "/", "\\*"};
         String[] chisla = primer.split(ekranActions[index]);
         if (chisla.length>2) {
-            throw new RuntimeException();                    //добавил забытое исключение
+            throw new Exception("Должно быть не больше одного оператора");
         }
 
         if (index == 0) {
